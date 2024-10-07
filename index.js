@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = require("dotenv")
 
 // Import routes
-const carRouter = require('./routes/carRouter')
+const carRouter = require('./routes/userRouter')
 
 dotenv.config()
 const PORT = process.env.PORT
@@ -23,7 +23,7 @@ app.get('/health-check', (req, res) => {
 })
 
 // Routes
-app.use('/api/v1/cars', carRouter)
+app.use('/api/v1/users', carRouter)
 
 // middleware
 app.use((req, res, next) => {
