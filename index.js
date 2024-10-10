@@ -3,6 +3,8 @@ const dotenv = require("dotenv")
 
 // Import routes
 const carRouter = require('./routes/userRouter')
+const projectRouter = require('./routes/projectRouter')
+const taskRouter = require("./routes/taskRouter")
 
 dotenv.config()
 const PORT = process.env.PORT
@@ -24,6 +26,8 @@ app.get('/health-check', (req, res) => {
 
 // Routes
 app.use('/api/v1/users', carRouter)
+app.use('/api/v1/projects', projectRouter)
+app.use('/api/v1/tasks', taskRouter)
 
 // middleware
 app.use((req, res, next) => {
