@@ -2,7 +2,10 @@ const { user } = require("../models");
 
 const getUsers = async (req, res) => {
     try {
-        const users = await user.findAll();
+        const users = await user.findAll({
+            order: [["id", "ASC"]]
+        });
+
 
         res.status(200).json({
             status: true,

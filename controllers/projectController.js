@@ -2,7 +2,9 @@ const { project } = require("../models");
 
 const getProjects = async (req, res) => {
     try {
-        const allProject = await project.findAll();
+        const allProject = await project.findAll({
+            order: [["id", "ASC"]],
+        });
 
         res.status(200).json({
             status: true,

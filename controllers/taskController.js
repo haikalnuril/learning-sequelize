@@ -2,7 +2,9 @@ const { task } = require('../models')
 
 const getTasks = async (req, res) => {
     try{
-        const allTasks = await task.findAll()
+        const allTasks = await task.findAll({
+            order: [["id", "ASC"]]
+        })
 
         res.status(200).json({
             status: true,
