@@ -78,6 +78,42 @@ const createProject = async (req, res) => {
     }
 }
 
+const updateProject = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, status, description } = req.body;
+
+        // Find the project
+        const Project = await project.findByPk(id);
+
+        if (!Project) {
+            return res.status(404).json({
+                status: false,
+                message: "Project not found"
+            });
+        }
+
+        const updatedProject = await Project.update({
+            name,
+            status,
+            description
+        });
+
+        return res.status(200).json({
+            status: true,
+            message: "Project updated successfully",
+            data: updatedProject
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({
+            status: false,
+            message: "An error occurred while updating the project",
+            error: err.message
+        });
+    }
+}
+
 const deleteProject = async (req, res) => {
     try {
         const { id } = req.params;
@@ -109,4 +145,4 @@ const deleteProject = async (req, res) => {
     }
 };
 
-module.exports = { getProjects, getProjectById, createProject, deleteProject };
+module.exports = { getProjects, getProjectById, createProject, updateProject, deleteProject };
